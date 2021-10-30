@@ -24,3 +24,5 @@
 const dotenv = require('dotenv')
 dotenv.config()
 ```
+## 用户注册接口
+1. 使用`koa`只能使用`use`，没法区分`post`。所以安装一下`koa-router`
