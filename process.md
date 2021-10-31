@@ -26,3 +26,10 @@ dotenv.config()
 ```
 ## 用户注册接口
 1. 使用`koa`只能使用`use`，没法区分`post`。所以安装一下`koa-router`
+## 接口逻辑相关内容cotroller
+* 放到controller文件夹下
+* 以user.controller.js为例，新建UserController类，导出，然后在user.router.js中引入使用这个类中的方法，实际处理逻辑的还是在这个类里面
+## 将数据库处理放入service下
+* 在service目录下创建user.service.js文件，创建UserService类用于处理数据库，在`user.controller.js`处理接口逻辑时，如果需要对数据库进行操作，直接调用即可
+## 解析post的body数据
+* 使用koa-bodyparser
