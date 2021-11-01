@@ -5,7 +5,7 @@ class UserController{
         const user = ctx.request.body;
 
         //传数据，单独抽文件
-        const result = await service.create(user)
+        const result = await  service.create(user)
         //返回数据
         ctx.body = result;
     }

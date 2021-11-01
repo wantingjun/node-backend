@@ -1,7 +1,10 @@
+const connection = require('../app/database') // promise的形式
 class UserService {
     async create(user){
-        console.log("用户数据保存到数据库：",user)
-        return "创建用户成功"
+        const {name,password}=user
+       const statement =`INSERT INTO users (name,password) VALUES (?,?);`
+       const result = await connection.execute(statement,[name,password]) 
+        return result
     }
 }
 module.exports = new UserService()
