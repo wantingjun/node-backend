@@ -33,3 +33,18 @@ dotenv.config()
 * 在service目录下创建user.service.js文件，创建UserService类用于处理数据库，在`user.controller.js`处理接口逻辑时，如果需要对数据库进行操作，直接调用即可
 ## 解析post的body数据
 * 使用koa-bodyparser
+## 拦截中间件
+* verifyUser验证用户
+* 这些中间件写在middleware文件夹下
+## 错误处理
+* 发射错误
+```
+ctx.app.emit('error',error,ctx) //把错误信息发射出去
+```
+* 监听错误
+```
+app.on('error',errorHandler) // 监听error，使用errorHandler 处理
+
+```
+* 创建app/error-handle.js文件，处理错误
+* 定义constants/error-types错误类型，在`app/error-handle.js`中调用错误类型
