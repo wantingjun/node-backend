@@ -63,3 +63,9 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 * 判断name和assword不为空
 * 判断用户是否存在（不存在就报错 ）
 * 判断密码和数据库中的密码是否一致（加密比对）
+## 重构路由
+* 通过一行代码，把所有路由注册到app/index.js中
+### 步骤
+1. 在router文件夹下创建index.js
+2. 在index.js到当前文件夹下的所有非index.js文件，然后倒入挂载
+3. 在app/index.js中导入router/index.js
