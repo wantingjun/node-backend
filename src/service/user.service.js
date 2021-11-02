@@ -10,7 +10,8 @@ class UserService {
     async getUserByName(name){
         const statement=`SELECT *FROM users WHERE name =?;`;
         const result = await connection.execute(statement,[name]);
-        return result[0];
+        // console.log(result)
+        return result[0]; // result[0]是得到的用户
     }
 }
 module.exports = new UserService()

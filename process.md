@@ -53,4 +53,13 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 * 新建utils/password-handle.js，使用MD5进行加密
 ## 登录凭证
 * cookie+session、token（jwt）
-### 登录相关（授权）
+## 登录相关（授权）
+### 登录结构
+* 创建auth.router
+### 登录账号密码的校验
+* 在登录路由插入中间件处理就可以了`authRouter.post('/login',login)`
+1. 中间件verifyLogin
+* 获取用户名和密码
+* 判断name和assword不为空
+* 判断用户是否存在（不存在就报错 ）
+* 判断密码和数据库中的密码是否一致（加密比对）

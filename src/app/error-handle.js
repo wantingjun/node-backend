@@ -10,7 +10,14 @@ const errorHandler = (error,ctx)=>{
             status = 409; // conflict 
             message ="用户名已存在"
             break;
-                
+        case  errorType.USER_DOES_NOT_EXISTS:
+            status = 400; // 参数错误，用户不存在
+            message ="用户不存在"
+            break;         
+        case  errorType.PASSWORD_IS_INCORRECT:
+            status = 400; // 密码错误
+            message ="密码不正确"
+            break;         
         default:
             status = 404;
             message = "NOT FOUND"
