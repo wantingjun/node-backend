@@ -1,5 +1,6 @@
 // 关于用户的中间件
 const errorType = require('../constants/error-types')
+const service = require('../service/user.service')
 const verifyUser  = async (ctx,next)=>{
     //1、获取用户名和密码
     const {name,password} = ctx.request.body;
@@ -12,6 +13,11 @@ const verifyUser  = async (ctx,next)=>{
     }
 
     //3. 判断这次注册的name是没有注册过的
+    const result = await service.getUserByName(name)
+    if(result.length){
+        const error = new Error(errorType.USER_ALREADY_EXISTS)
+        return ctx.app.emit("error",error,ctx)
+    }
 
     await next()
 }
