@@ -50,3 +50,7 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 * 定义constants/error-types错误类型，在`app/error-handle.js`中调用错误类型
 ## 用户密码加密存储
 * 用户密码在数据库里不能是明文的，要加密存储
+* 新建utils/password-handle.js，使用MD5进行加密
+## 登录凭证
+* cookie+session、token（jwt）
+### 登录相关（授权）
