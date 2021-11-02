@@ -1,6 +1,7 @@
 // 关于用户的中间件
 const errorType = require('../constants/error-types')
 const service = require('../service/user.service')
+const md5password = require('../utils/password-handle')
 const verifyUser  = async (ctx,next)=>{
     //1、获取用户名和密码
     const {name,password} = ctx.request.body;
@@ -21,6 +22,14 @@ const verifyUser  = async (ctx,next)=>{
 
     await next()
 }
+const handlePassword= async (ctx,next)=>{
+    let  {password} = ctx.request.body;
+    //console.log(password)
+    ctx.request.body.password = md5password(password)//加密之后的密码
+    // console.log(ctx.request.body.password)
+    await next();
+
+}
 module.exports= {
-    verifyUser
+    verifyUser,handlePassword
 }
