@@ -78,3 +78,8 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 * 新建`verifyAuth`中间件
 ## moment动态模块
 1. 发表动态
+2. 获取动态
+* 使用restful的api接口
+* 注意params和query的区别
+* 查询语句
+3. 查询多条动态
