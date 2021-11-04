@@ -76,3 +76,5 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 2. 引入2个key，在`app/keys`下的`private.key`和`public.key`,把这2个key放入`config`文件中，便于调用
 ### 验证token
 * 新建`verifyAuth`中间件
+## moment动态模块
+1. 发表动态

@@ -2,7 +2,8 @@ const errorType = require('../constants/error-types');
 const service = require('../service/user.service')
 const md5password = require('../utils/password-handle')
 const {PUBLIC_KEY} = require('../app/config')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const authRouter = require('../router/auth.router');
 
 
 const verifyLogin = async (ctx,next)=>{
@@ -40,6 +41,10 @@ const verifyAuth = async(ctx,next)=>{
     console.log('验证授权的middleware')
     // 1. 取出token
     const authorization = ctx.headers.authorization
+    if(!authorization){ // 处理不带token的情况
+        const err = new Error(errorType.UNAUTHORIZATION)
+        return ctx.app.emit("error",err,ctx)
+    }
     const token = authorization.replace("Bearer ",'') // 注意bearer后面的空格不要丢了
     // 2. 验证token(id,name,iat,exp)
     // 验证成功会得到携带的信息和时间等等
