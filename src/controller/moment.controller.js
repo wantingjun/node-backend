@@ -25,6 +25,17 @@ class MomentController{
         const result = await momentService.getMomentList(offset,size);
         ctx.body = result
     }
+    async update(ctx,next){
+        // 获取参数
+        const {momentId} = ctx.params
+        const {content} = ctx.request.body
+        // 2. 修改内容
+        const result = await momentService.update(content,momentId)
+        //3. 返回内容
+        ctx.body = result
+        
+
+    }
 }
 
 

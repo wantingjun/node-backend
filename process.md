@@ -83,3 +83,10 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 * 注意params和query的区别
 * 查询语句
 3. 查询多条动态
+4. 修改状态
+* 中间件1`verifyAuth`：验证是否登陆。必须登录才能修改
+* 中间件2`verifyPermission`： 验证是否有权限。普通用户只能修改自己的状态，管理员可以修改他人状态
+1. 在router里定义接口
+2. 登录中间件
+3. 权限中间件：增加对应的service，查找当前momentID下符合user_id(当前登录用户)的记录检查是否具备权限，不具备抛出异常
+3. 在update的controller里进行修改

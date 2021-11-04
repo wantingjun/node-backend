@@ -1,12 +1,13 @@
 const errorType = require('../constants/error-types');
 const service = require('../service/user.service')
+const authService = require('../service/auth.service')
 const md5password = require('../utils/password-handle')
 const {PUBLIC_KEY} = require('../app/config')
 const jwt = require('jsonwebtoken');
 const authRouter = require('../router/auth.router');
 
 
-const verifyLogin = async (ctx,next)=>{
+const verifyLogin = async (ctx,next)=>{ // 登陆是的验证，用户是否存在与数据库，账号密码对不对
     // 1. 获取用户名和密码
     const {name,password} = ctx.request.body;
    //2. 判断name和assword不为空
@@ -37,7 +38,7 @@ const verifyLogin = async (ctx,next)=>{
 
 }
 
-const verifyAuth = async(ctx,next)=>{
+const verifyAuth = async(ctx,next)=>{ // 检验用户是否登陆
     console.log('验证授权的middleware')
     // 1. 取出token
     const authorization = ctx.headers.authorization
@@ -53,17 +54,32 @@ const verifyAuth = async(ctx,next)=>{
         const result = jwt.verify(token,PUBLIC_KEY,{ 
             algorithms:["RS256"]
         })
-        console.log(result)
         ctx.user = result; // 把result保存起来
         await next()
     } catch(error){
         const err = new Error(errorType.UNAUTHORIZATION)
+        // console.log(error)
         ctx.app.emit("error",err,ctx)
 
     }
-
-
+}
+ 
+const verifyPermission = async(ctx,next)=>{ // 权限中间件，判断用户是否具备这个权限。
+    console.log("验证权限的middleware")
+    //1. 获取参数
+    const {momentId} = ctx.params
+    const {id} = ctx.user;// 用户的id
+    console.log(ctx.user)
+    //2.查询是否具备权限
+    try{
+        const isPermission = await authService.checkMoment(momentId, id)
+        if(!isPermission) throw new Error() // 没有权限,抛出异常，进入catch
+        await next();
+    } catch(error){
+        const err = new Error(errorType.UNPERMISSION)
+        return ctx.app.emit("error",err,ctx)
+    }
 }
 module.exports = {
-    verifyLogin,verifyAuth
+    verifyLogin,verifyAuth,verifyPermission
 }

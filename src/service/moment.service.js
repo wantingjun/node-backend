@@ -19,10 +19,15 @@ class momentService {
         return result;
 
     }
-    async getMomentList(offset,size){
+    async getMomentList(offset,size){ // 获取动态的数据库列表
        const statement = `${sqlFragment} LIMIT ?,?;`
        const [result] =await connection.execute(statement,[offset,size])
        return result;
+    }
+    async update(content,momentId){ // 对数据库进行修改 
+        const statement = `UPDATE moment SET content =? WHERE id = ?;`
+        const [result] = await connection.execute(statement,[content,momentId])
+        return result;
     }
 }
 
