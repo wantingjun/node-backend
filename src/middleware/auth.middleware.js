@@ -1,7 +1,10 @@
 const errorType = require('../constants/error-types');
-const { use } = require('../router/user.router');
 const service = require('../service/user.service')
 const md5password = require('../utils/password-handle')
+const {PUBLIC_KEY} = require('../app/config')
+const jwt = require('jsonwebtoken')
+
+
 const verifyLogin = async (ctx,next)=>{
     // 1. 获取用户名和密码
     const {name,password} = ctx.request.body;
@@ -32,6 +35,30 @@ const verifyLogin = async (ctx,next)=>{
     await next()
 
 }
+
+const verifyAuth = async(ctx,next)=>{
+    console.log('验证授权的middleware')
+    // 1. 取出token
+    const authorization = ctx.headers.authorization
+    const token = authorization.replace("Bearer ",'') // 注意bearer后面的空格不要丢了
+    // 2. 验证token(id,name,iat,exp)
+    // 验证成功会得到携带的信息和时间等等
+    // 没有成功用trycatch
+    try{
+        const result = jwt.verify(token,PUBLIC_KEY,{ 
+            algorithms:["RS256"]
+        })
+        console.log(result)
+        ctx.user = result; // 把result保存起来
+        await next()
+    } catch(error){
+        const err = new Error(errorType.UNAUTHORIZATION)
+        ctx.app.emit("error",err,ctx)
+
+    }
+
+
+}
 module.exports = {
-    verifyLogin
+    verifyLogin,verifyAuth
 }

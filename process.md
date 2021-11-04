@@ -70,5 +70,9 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 2. 在index.js到当前文件夹下的所有非index.js文件，然后倒入挂载
 3. 在app/index.js中导入router/index.js
 ## token
+### 颁发token
 * 安装`npm install jsonwebtoken`
-1. 在auth.controller.js/login添加盘发签名
+1. 在auth.controller.js/login添加颁发签名，使用jwt
+2. 引入2个key，在`app/keys`下的`private.key`和`public.key`,把这2个key放入`config`文件中，便于调用
+### 验证token
+* 新建`verifyAuth`中间件

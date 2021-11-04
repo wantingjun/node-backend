@@ -17,7 +17,11 @@ const errorHandler = (error,ctx)=>{
         case  errorType.PASSWORD_IS_INCORRECT:
             status = 400; // 密码错误
             message ="密码不正确"
-            break;         
+            break;    
+        case  errorType.UNAUTHORIZATION:
+            status = 401; // 未授权
+            message ="无效的token"
+            break;        
         default:
             status = 404;
             message = "NOT FOUND"
