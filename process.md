@@ -69,3 +69,6 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 1. 在router文件夹下创建index.js
 2. 在index.js到当前文件夹下的所有非index.js文件，然后倒入挂载
 3. 在app/index.js中导入router/index.js
+## token
+* 安装`npm install jsonwebtoken`
+1. 在auth.controller.js/login添加盘发签名
