@@ -9,5 +9,15 @@ class commentController{
         ctx.body = result
 
     }
+    async reply(ctx,next){
+        // 1. 获取数据
+        const {momentId,content} = ctx.request.body
+        const {commentId} = ctx.params
+        const {id} = ctx.user
+        // 2. 插入数据里
+        const result = await service.reply(momentId,content,id,commentId)
+        ctx.body = result
+
+    }
 }
 module.exports = new commentController()

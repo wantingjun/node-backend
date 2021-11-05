@@ -110,3 +110,4 @@ CREATE TABLE IF NOT EXISTS `comment`(
 ```
 ### 创建评论
 1. 提交评论的时候，需动态id和评论内容，和评论者id（通过token读到）
+### 回复评论
