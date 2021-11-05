@@ -29,6 +29,10 @@ class commentController{
 
     }
     async remove(ctx,next){
+        const {commentId} = ctx.params
+        // 2
+        const result = await service.remove(commentId)
+        ctx.body = result
 
     }
 }

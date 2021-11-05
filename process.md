@@ -117,3 +117,5 @@ CREATE TABLE IF NOT EXISTS `comment`(
 2. 如何是指动态的tableName
 1.使用闭包
 2. 使用restful api的参数
+### 删除评论
+* 注意联动的删除

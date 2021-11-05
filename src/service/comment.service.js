@@ -15,5 +15,10 @@ class CommonService{
         const [result] = await connection.execute(statement,[content,commentId])
         return result
     }
+    async remove (commentId){
+        const statement = `DELETE FROM comment WHERE id = ?;`
+        const [result] = await connection.execute(statement,[commentId])
+        return result;
+    }
 }
 module.exports = new CommonService()

@@ -6,5 +6,5 @@ const commentRouter = new Router({prefix:'/comment'});
 commentRouter.post('/',verifyAuth,create) // 发布评论
 commentRouter.post('/:commentId/reply',verifyAuth,reply) // 回复评论
 commentRouter.patch('/:commentId',verifyAuth,verifyPermission,update) // 修改评论
-commentRouter.delete('/:commentId',verifyAuth,remove) // 删除评论
+commentRouter.delete('/:commentId',verifyAuth,verifyPermission,remove) // 删除评论
 module.exports = commentRouter
