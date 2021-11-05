@@ -69,20 +69,22 @@ const verifyAuth = async(ctx,next)=>{ // 检验用户是否登陆
  *  一对一: user -> role
  *  多对多: role -> menu(删除动态/修改动态)
  */
-const verifyPermission = async(ctx,next)=>{ // 修改动态的权限：权限中间件，判断用户是否具备这个权限。
-    console.log("验证权限的middleware")
-    //1. 获取参数
-    const {momentId} = ctx.params
-    const {id} = ctx.user;// 用户的id
-    console.log(ctx.user)
-    //2.查询是否具备权限
-    try{
-        const isPermission = await authService.checkMoment(momentId, id)
-        if(!isPermission) throw new Error() // 没有权限,抛出异常，进入catch
-        await next();
-    } catch(error){
-        const err = new Error(errorType.UNPERMISSION)
-        return ctx.app.emit("error",err,ctx)
+const verifyPermission = (tableName)=>{ // 闭包的形似
+    return async(ctx,next)=>{ // 修改动态的权限：权限中间件，判断用户是否具备这个权限。
+        console.log("验证权限的middleware")
+        //1. 获取参数
+        const {momentId} = ctx.params
+        const {id} = ctx.user;// 用户的id
+        console.log(ctx.user)
+        //2.查询是否具备权限
+        try{
+            const isPermission = await authService.checkResource(tableName,momentId, id)
+            if(!isPermission) throw new Error() // 没有权限,抛出异常，进入catch
+            await next();
+        } catch(error){
+            const err = new Error(errorType.UNPERMISSION)
+            return ctx.app.emit("error",err,ctx)
+        }
     }
 }
 module.exports = {
