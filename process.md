@@ -115,4 +115,5 @@ CREATE TABLE IF NOT EXISTS `comment`(
 登录权限+ 用户权限
 1. 怎么设置验证用户权限,统一的checkResource
 2. 如何是指动态的tableName
-* 使用闭包
+1.使用闭包
+2. 使用restful api的参数
