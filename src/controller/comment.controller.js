@@ -9,7 +9,7 @@ class commentController{
         ctx.body = result
 
     }
-    async reply(ctx,next){
+    async reply(ctx,next){ // 回复评理
         // 1. 获取数据
         const {momentId,content} = ctx.request.body
         const {commentId} = ctx.params
@@ -17,6 +17,18 @@ class commentController{
         // 2. 插入数据里
         const result = await service.reply(momentId,content,id,commentId)
         ctx.body = result
+
+    }
+    async update(ctx,next){ // 更新评论 
+        const {commentId} = ctx.params
+        const {content} = ctx.request.body
+        // 2. 数据
+        const result = await service.update(commentId,content)
+
+        ctx.body = result
+
+    }
+    async remove(ctx,next){
 
     }
 }

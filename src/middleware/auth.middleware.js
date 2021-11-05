@@ -69,7 +69,7 @@ const verifyAuth = async(ctx,next)=>{ // 检验用户是否登陆
  *  一对一: user -> role
  *  多对多: role -> menu(删除动态/修改动态)
  */
-const verifyPermission = async(ctx,next)=>{ // 权限中间件，判断用户是否具备这个权限。
+const verifyPermission = async(ctx,next)=>{ // 修改动态的权限：权限中间件，判断用户是否具备这个权限。
     console.log("验证权限的middleware")
     //1. 获取参数
     const {momentId} = ctx.params
