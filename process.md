@@ -90,3 +90,23 @@ app.on('error',errorHandler) // 监听error，使用errorHandler 处理
 2. 登录中间件
 3. 权限中间件：增加对应的service，查找当前momentID下符合user_id(当前登录用户)的记录检查是否具备权限，不具备抛出异常
 3. 在update的controller里进行修改
+## comment评论
+### 创建评论表
+```
+CREATE TABLE IF NOT EXISTS `comment`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	content VARCHAR(1000) NOT NULL,
+	moment_id INT NOT NULL,
+	user_id INT NOT NULL,
+	comment_id INT DEFAULT NULL,
+	createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	
+	FOREIGN KEY(moment_id) REFERENCES moment(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(comment_id) REFERENCES comment(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+```
+### 创建评论
+1. 提交评论的时候，需动态id和评论内容，和评论者id（通过token读到）
