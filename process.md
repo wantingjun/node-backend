@@ -139,3 +139,19 @@ CREATE TABLE IF NOT EXISTS `label`(
 );
 ```
 * 多对多：一个动态有多个标签，一个标签归属于多个动态
+### 新建moment_label表
+```
+CREATE TABLE IF NOT EXISTS `moment_label`(
+	moment_id INT NOT NULL,
+	label_id INT NOT NULL,
+	createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY(moment_id, label_id),
+	FOREIGN KEY (moment_id) REFERENCES moment(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (label_id) REFERENCES label(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+```
+### 给动态添加标签
+* 接口：moment/momentId/labels
+* 参数： post，在body里,{"labels":[array]}
+* 数据：v
