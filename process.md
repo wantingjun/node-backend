@@ -151,7 +151,8 @@ CREATE TABLE IF NOT EXISTS `moment_label`(
 	FOREIGN KEY (label_id) REFERENCES label(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
+### 创建标签
 ### 给动态添加标签
 * 接口：moment/momentId/labels
 * 参数： post，在body里,{"labels":[array]}
-* 数据：v
+* 判断标签是否存在，不存在就创建
