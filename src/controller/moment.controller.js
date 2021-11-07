@@ -46,9 +46,7 @@ class MomentController{
     async addLabels(ctx,next){
         const {labels} = ctx.request.body
         console.log(labels)
-
         ctx.body = " 添加标签"
-
     }
 }
 
