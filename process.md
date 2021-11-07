@@ -124,3 +124,18 @@ CREATE TABLE IF NOT EXISTS `comment`(
 ### 获取评论列表
 1. 方法1：动态的接口和评论的接口是分开的
 2. 方法2： 请求动态的接口的时候，就会一起携带评论的列表
+## 点赞功能
+1. 动态： 用户之间多对多
+2. 一个动态可以被多个用户点赞
+3. 一个用户可以点赞多个状态
+## 标签
+* 需要标签表
+```
+CREATE TABLE IF NOT EXISTS `label`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(10) NOT NULL UNIQUE,
+	createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+* 多对多：一个动态有多个标签，一个标签归属于多个动态
