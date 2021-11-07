@@ -113,9 +113,11 @@ CREATE TABLE IF NOT EXISTS `comment`(
 ### 回复评论
 ### 修改评论
 登录权限+ 用户权限
-1. 怎么设置验证用户权限,统一的checkResource
+1. 怎么设置验证用户权限,统一的checkResource(通用性
 2. 如何是指动态的tableName
 1.使用闭包
 2. 使用restful api的参数
 ### 删除评论
 * 注意联动的删除
+### 重新设计获取动态列表接口
+* 增加每个动态评论数量字段
