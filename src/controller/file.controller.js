@@ -8,6 +8,7 @@ class fileController{
         const {id} = ctx.user
         // 2.将图像信息数据保存到数据库中
         const result = await fileService.createAvatar(filename,mimetype,size,id)
+        console.log(result)
         //3.返回结果
         ctx.body = result;
     }

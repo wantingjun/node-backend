@@ -168,3 +168,12 @@ CREATE TABLE IF NOT EXISTS `moment_label`(
 1. 获取信息时，获取用户头像
 ### 过程
 1. 安装`koa-multer`
+### 获取图像
+1. 在user.router文件里增加路由
+```
+userRouter.get('/:userId/avatar',avatarInfo)//获取用户头像
+```
+2. 要设置响应对象类型，否则在浏览器get这个请求的话，浏览器不知道请求类型会自动下载图片
+```
+ctx.response.set('content-type',avatarInfo.mimetype)//设置响应对象
+```
