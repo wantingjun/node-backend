@@ -156,3 +156,15 @@ CREATE TABLE IF NOT EXISTS `moment_label`(
 * 接口：moment/momentId/labels
 * 参数： post，在body里,{"labels":[array]}
 * 判断标签是否存在，不存在就创建
+## 上传图片
+### 上传头像
+1. 图片：本质上是一个文件
+* 做一个文件上传功能（/upload）
+* 目的：服务器端可以保存一张图片
+2. 提供一个接口：让用户获取图片
+* /1/avatar --> 找到图片\读取图片\content-type:image/jpeg\返回图像信息
+3. 将URL存储到用户信息中
+* avatarURL: 头像的地址
+1. 获取信息时，获取用户头像
+### 过程
+1. 安装`koa-multer`
