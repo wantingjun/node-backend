@@ -62,13 +62,21 @@ class MomentController{
         ctx.body = " 给动态添加标签成功"
     }
     async fileInfo(ctx,next){
-        const {filename} = ctx.params
+        let {filename} = ctx.params
         //2 根据filename查询相关数据
         const fileInfo = await fileService.getFileByFilename(filename)
-        ctx.response.set('content-type',fileInfo.mimetype)
-        ctx.body = fs.createReadStream(`${PICTURE_PATH}/${filename}`)
+        const {type} = ctx.query
+       // console.log(type,fileInfo)
+        const types = ["small","middle","large"];
+        if(types.some(item=>item === type)){ 
+            filename = filename + '-'+type
+        }
+        console.log(fileInfo)
+        // ctx.response.set('content-type',fileInfo.mimetype)
+        // ctx.body = fs.createReadStream(`${PICTURE_PATH}/${filename}`)
 
-
+        ctx.response.set('content-type', fileInfo.mimetype);
+        ctx.body = fs.createReadStream(`${PICTURE_PATH}/${filename}`);
     }
 }
 

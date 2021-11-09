@@ -18,6 +18,7 @@ class fileService{
     async getFileByFilename(filename){ //根据filename查询file
         const statement = `SELECT * FROM file WHERE filename =?;`
         const [result] = await connection.execute(statement,[filename])
+       
         return result[0];
     }
 

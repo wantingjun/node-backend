@@ -177,3 +177,4 @@ userRouter.get('/:userId/avatar',avatarInfo)//获取用户头像
 ```
 ctx.response.set('content-type',avatarInfo.mimetype)//设置响应对象
 ```
+### 动态配图
