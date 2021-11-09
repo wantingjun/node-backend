@@ -22,8 +22,6 @@ class UserController{
         // 提供图像信息
         ctx.response.set('content-type',avatarInfo.mimetype)//设置响应对象
         ctx.body = fs.createReadStream(`${AVATAR_PATH}/${avatarInfo.filename}`);// 读文件，以stream的形式返回
-        
-
     }
 
 }

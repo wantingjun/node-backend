@@ -13,5 +13,10 @@ class UserService {
         // console.log(result)
         return result[0]; // result[0]是得到的用户
     }
+    async updateAvatarUrlById(avatarUrl,userId){ // user表里添加图像url
+        const statement = `UPDATE user SET avatar_url = ? WHERE id = ?`
+        const [result] = await connection.execute(statement,[avatarUrl,userId])
+        return result;
+    }
 }
 module.exports = new UserService()
