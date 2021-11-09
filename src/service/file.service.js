@@ -10,6 +10,11 @@ class fileService{
         const [result] = await connection.execute(statement,[userId])
         return result[0];
     }
+    async createFile(filename,mimetype,size,userId,momentId){
+        const statement = `INSERT INTO file (filename, mimetype,size,user_id,moment_id) VALUES (?,?,?,?,?);`
+        const [result] = await connection.execute(statement,[filename,mimetype,size,userId,momentId])
+        return result[0];
+    }
 
 
 }
